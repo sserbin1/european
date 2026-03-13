@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: 'Стандарти EN та ISO для офісних приміщень | European',
   description:
     'Повний довідник 6 ключових європейських стандартів для офісного простору: EN 12464-1, ISO 3382, EN ISO 9612, Directive 90/270/EEC, EN 13779, ISO 45001. Освітлення, акустика, вентиляція та безпека.',
+  alternates: {
+    canonical: 'https://european.com.ua/standarty/',
+  },
   openGraph: {
     title: 'Стандарти EN та ISO для офісних приміщень',
     description: '6 ключових європейських стандартів для сучасного офісу',
