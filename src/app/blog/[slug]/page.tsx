@@ -208,6 +208,21 @@ export default async function BlogPostPage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* ── Cover Image ─────────────────────────────────────────── */}
+      {post.coverImage && (
+        <section className="bg-white pb-8">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src={post.coverImage}
+                alt={post.title}
+                className="w-full h-auto object-cover aspect-[16/9]"
+              />
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ── Article Body ──────────────────────────────────────────── */}
       <section className="bg-white pb-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
