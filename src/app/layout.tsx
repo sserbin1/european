@@ -1,9 +1,24 @@
 import type { Metadata } from "next"
+import { Poppins, Open_Sans } from "next/font/google"
 import { siteConfig } from "../../site.config"
 import { generateWebsiteJsonLd, generateOrganizationJsonLd } from "@/lib/seo"
 import Header from "@/components/layout/Header"
 import Footer from "@/components/layout/Footer"
 import "./globals.css"
+
+const poppins = Poppins({
+  subsets: ["latin", "latin-ext"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-poppins",
+  display: "swap",
+})
+
+const openSans = Open_Sans({
+  subsets: ["latin", "latin-ext", "cyrillic"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-opensans",
+  display: "swap",
+})
 
 export const metadata: Metadata = {
   title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
@@ -34,9 +49,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="uk">
       <head>
-        <script defer src="http://46.224.111.10:3100/script.js" data-website-id="7e971ae5-c36e-471c-89e8-c3485b331cdc"></script>
+        <script
+          defer
+          src="http://46.224.111.10:3100/script.js"
+          data-website-id="7e971ae5-c36e-471c-89e8-c3485b331cdc"
+        />
       </head>
-      <body>
+      <body className={`${poppins.variable} ${openSans.variable}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
