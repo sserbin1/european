@@ -21,26 +21,33 @@ const openSans = Open_Sans({
 })
 
 export const metadata: Metadata = {
-  title: { default: siteConfig.name, template: `%s | ${siteConfig.name}` },
+  title: {
+    default: "Євростандарти Офісу — європейські норми EN та ISO для офісного простору",
+    template: `%s | ${siteConfig.name}`,
+  },
   description: siteConfig.description,
   keywords: siteConfig.keywords,
   metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: siteConfig.url,
+    languages: {
+      "uk": siteConfig.url,
+    },
+  },
   icons: { icon: siteConfig.favicon || "/favicon.ico" },
   openGraph: {
     type: "website",
     locale: siteConfig.locale || "uk_UA",
     siteName: siteConfig.name,
-    title: siteConfig.name,
+    title: "Євростандарти Офісу — європейські норми EN та ISO для офісного простору",
     description: siteConfig.description,
-    ...(siteConfig.ogImage && {
-      images: [{ url: siteConfig.ogImage, width: 1200, height: 630, alt: siteConfig.name }],
-    }),
+    images: [{ url: `${siteConfig.url}/images/hero-office.jpg`, width: 1200, height: 630, alt: siteConfig.name }],
   },
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
-    ...(siteConfig.ogImage && { images: [siteConfig.ogImage] }),
+    images: [`${siteConfig.url}/images/hero-office.jpg`],
   },
   robots: { index: true, follow: true },
 }
