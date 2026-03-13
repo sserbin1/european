@@ -15,6 +15,7 @@ export interface BlogPost {
   publishedAt: string
   category?: string
   language?: string
+  coverImage?: string
 }
 
 const BLOG_DIR = path.join(process.cwd(), 'content', 'blog')
@@ -48,6 +49,7 @@ export function getPostBySlug(slug: string): BlogPost {
     publishedAt: data.publishedAt || '',
     category: data.category,
     language: data.language,
+    coverImage: data.coverImage,
   }
 }
 
