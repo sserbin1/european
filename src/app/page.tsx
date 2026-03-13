@@ -1,4 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: 'https://european.com.ua/',
+  },
+};
 import { getAllPosts } from "@/lib/blog";
 
 /* ── Inline SVG Icons (Lucide-style) ─────────────────────────────── */
