@@ -1,20 +1,33 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 
 const NAV_LINKS = [
   { label: "Головна", href: "/" },
-  { label: "Стандарти", href: "/blog/yevropeyski-standarty-ofisnogo-prostoru" },
-  { label: "Акустика", href: "/blog/akustyka-v-ofisi-chomu-tysha-tse-produktyvnist" },
-  { label: "Ергономіка", href: "/blog/ergonomika-robochogo-mistsya-za-yevropeyskimi-normamy" },
+  { label: "Стандарти", href: "/standarty/" },
+  { label: "Акустика", href: "/akustyka/" },
+  { label: "Ергономіка", href: "/ergonomika/" },
   { label: "Кабіни", href: "/kabiny/" },
   { label: "Блог", href: "/blog/" },
 ];
 
+/* Pages that have a dark gradient hero — header starts transparent with white text */
+const DARK_HERO_PAGES = ["/", "/standarty", "/akustyka", "/ergonomika"];
+
 export default function Header() {
+  const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  /* Does the current page have a dark hero? */
+  const hasDarkHero = DARK_HERO_PAGES.some(
+    (p) => pathname === p || pathname === p + "/"
+  );
+
+  /* If no dark hero, header is always "scrolled" (solid white bg, dark text) */
+  const isDark = isScrolled || !hasDarkHero;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -36,7 +49,7 @@ export default function Header() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+          isDark
             ? "bg-white/95 backdrop-blur-md shadow-sm"
             : "bg-transparent"
         }`}
@@ -53,7 +66,7 @@ export default function Header() {
               height="28"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={isScrolled ? "#1E293B" : "#fff"}
+              stroke={isDark ? "#1E293B" : "#fff"}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -65,7 +78,7 @@ export default function Header() {
             </svg>
             <span
               className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${
-                isScrolled ? "text-slate-900" : "text-white"
+                isDark ? "text-slate-900" : "text-white"
               }`}
               style={{ fontFamily: "var(--font-heading)" }}
             >
@@ -75,19 +88,26 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={`cursor-pointer px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
-                  isScrolled
-                    ? "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                    : "text-white/80 hover:text-white hover:bg-white/10"
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href || pathname === link.href.replace(/\/$/, "");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`cursor-pointer px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
+                    isDark
+                      ? isActive
+                        ? "text-[#2563EB] bg-blue-50"
+                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
+                      : isActive
+                        ? "text-white bg-white/15"
+                        : "text-white/80 hover:text-white hover:bg-white/10"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/kabiny/"
               className="cursor-pointer ml-3 px-4 py-2 text-sm font-semibold rounded-lg bg-blue-600 text-white hover:bg-blue-700 transition-colors duration-200"
@@ -101,7 +121,7 @@ export default function Header() {
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
             className={`cursor-pointer lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200 ${
-              isScrolled ? "hover:bg-slate-100" : "hover:bg-white/10"
+              isDark ? "hover:bg-slate-100" : "hover:bg-white/10"
             }`}
             aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
           >
@@ -110,7 +130,7 @@ export default function Header() {
               height="22"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={isScrolled ? "#1E293B" : "#fff"}
+              stroke={isDark ? "#1E293B" : "#fff"}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -137,16 +157,23 @@ export default function Header() {
         <div className="fixed inset-0 z-40 bg-white flex flex-col lg:hidden">
           <div className="h-16" />
           <nav className="flex-1 flex flex-col items-center justify-center gap-2 px-6">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={closeMobileMenu}
-                className="cursor-pointer w-full text-center text-lg font-medium text-slate-800 hover:text-blue-600 transition-colors duration-200 py-3 rounded-lg hover:bg-slate-50"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {NAV_LINKS.map((link) => {
+              const isActive = pathname === link.href || pathname === link.href.replace(/\/$/, "");
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={closeMobileMenu}
+                  className={`cursor-pointer w-full text-center text-lg font-medium transition-colors duration-200 py-3 rounded-lg ${
+                    isActive
+                      ? "text-blue-600 bg-blue-50"
+                      : "text-slate-800 hover:text-blue-600 hover:bg-slate-50"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <Link
               href="/kabiny/"
               onClick={closeMobileMenu}
