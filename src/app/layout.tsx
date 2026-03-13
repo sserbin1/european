@@ -29,7 +29,6 @@ export const metadata: Metadata = {
   keywords: siteConfig.keywords,
   metadataBase: new URL(siteConfig.url),
   alternates: {
-    canonical: siteConfig.url,
     languages: {
       "uk": siteConfig.url,
     },
