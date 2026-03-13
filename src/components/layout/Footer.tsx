@@ -2,12 +2,12 @@ import Link from "next/link";
 import { siteConfig } from "../../../site.config";
 
 const TOPICS = [
-  { label: "Стандарти EN/ISO", href: "/blog/yevropeyski-standarty-ofisnogo-prostoru" },
-  { label: "Акустика офісу", href: "/blog/akustyka-v-ofisi-chomu-tysha-tse-produktyvnist" },
-  { label: "Ергономіка", href: "/blog/ergonomika-robochogo-mistsya-za-yevropeyskimi-normamy" },
-  { label: "Open Space", href: "/blog/open-space-vs-kabinetna-systema" },
-  { label: "Звукоізоляція", href: "/blog/zvukoizolyatsiyni-rishennya-dlya-ofisu" },
-  { label: "Приватність", href: "/blog/yak-stvoryty-zonu-pryvatnosti-v-ofisi" },
+  { label: "Стандарти EN/ISO", href: "/standarty/" },
+  { label: "Акустика офісу", href: "/akustyka/" },
+  { label: "Ергономіка", href: "/ergonomika/" },
+  { label: "Open Space", href: "/blog/open-space-vs-kabinetna-systema/" },
+  { label: "Звукоізоляція", href: "/blog/zvukoizolyatsiyni-rishennya-dlya-ofisu/" },
+  { label: "Приватність", href: "/blog/yak-stvoryty-zonu-pryvatnosti-v-ofisi/" },
 ];
 
 const RESOURCES = [
