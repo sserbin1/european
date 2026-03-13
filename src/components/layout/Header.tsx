@@ -45,30 +45,59 @@ export default function Header() {
           {/* Logo */}
           <Link
             href="/"
-            className="cursor-pointer flex items-center gap-2.5"
+            className="cursor-pointer group flex items-center gap-3"
             onClick={closeMobileMenu}
           >
-            <svg
-              width="28"
-              height="28"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#1E293B"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="2" />
-              <path d="M9 3v18" />
-              <path d="M3 9h6" />
-              <path d="M3 15h6" />
-            </svg>
-            <span
-              className="text-lg font-semibold tracking-tight text-slate-900"
-              style={{ fontFamily: "var(--font-heading)" }}
-            >
-              Євростандарти Офісу
-            </span>
+            <div className="relative w-9 h-9 flex items-center justify-center">
+              {/* Animated glow ring on hover */}
+              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[6px]" />
+              {/* Logo container */}
+              <div className="relative w-9 h-9 rounded-xl bg-gradient-to-br from-blue-600 to-indigo-700 flex items-center justify-center shadow-md group-hover:shadow-lg group-hover:shadow-blue-500/25 transition-all duration-300 group-hover:scale-105">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="transition-transform duration-500 group-hover:rotate-[360deg]"
+                >
+                  {/* EU stars circle */}
+                  {[0, 60, 120, 180, 240, 300].map((angle) => {
+                    const r = 9;
+                    const cx = 12 + r * Math.cos((angle - 90) * Math.PI / 180);
+                    const cy = 12 + r * Math.sin((angle - 90) * Math.PI / 180);
+                    return (
+                      <circle
+                        key={angle}
+                        cx={cx}
+                        cy={cy}
+                        r="1.3"
+                        fill="#FBBF24"
+                        className="transition-all duration-300"
+                      />
+                    );
+                  })}
+                  {/* Building / office icon in center */}
+                  <rect x="8" y="7" width="8" height="11" rx="1" fill="none" stroke="white" strokeWidth="1.5" />
+                  <line x1="10.5" y1="9.5" x2="10.5" y2="11" stroke="white" strokeWidth="1" strokeLinecap="round" />
+                  <line x1="13.5" y1="9.5" x2="13.5" y2="11" stroke="white" strokeWidth="1" strokeLinecap="round" />
+                  <line x1="10.5" y1="13" x2="10.5" y2="14.5" stroke="white" strokeWidth="1" strokeLinecap="round" />
+                  <line x1="13.5" y1="13" x2="13.5" y2="14.5" stroke="white" strokeWidth="1" strokeLinecap="round" />
+                  {/* Door */}
+                  <rect x="10.5" y="15.5" width="3" height="2.5" rx="0.5" fill="white" opacity="0.6" />
+                </svg>
+              </div>
+            </div>
+            <div className="flex flex-col">
+              <span
+                className="text-[17px] font-bold tracking-tight text-slate-900 leading-tight"
+                style={{ fontFamily: "var(--font-heading)" }}
+              >
+                Євростандарти
+              </span>
+              <span className="text-[10px] font-semibold tracking-[0.2em] uppercase text-blue-600 leading-tight">
+                Офісу
+              </span>
+            </div>
           </Link>
 
           {/* Desktop Nav */}
