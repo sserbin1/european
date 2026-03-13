@@ -176,15 +176,16 @@ export default function HomePage() {
     <main>
       {/* ── Section 1: Hero ──────────────────────────────────────── */}
       <section className="relative -mt-16 overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-900">
-        {/* Subtle grid pattern */}
+        {/* Hero background image */}
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-20"
           style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
+            backgroundImage: "url('/images/hero-office.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
           }}
         />
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 via-slate-800/70 to-blue-900/80" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20 sm:pt-40 sm:pb-28">
           <div className="max-w-3xl">
             <p className="text-blue-400 text-sm font-semibold tracking-widest uppercase mb-4">
