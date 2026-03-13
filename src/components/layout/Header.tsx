@@ -13,21 +13,10 @@ const NAV_LINKS = [
   { label: "Блог", href: "/blog/" },
 ];
 
-/* Pages that have a dark gradient hero — header starts transparent with white text */
-const DARK_HERO_PAGES = ["/", "/standarty", "/akustyka", "/ergonomika"];
-
 export default function Header() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  /* Does the current page have a dark hero? */
-  const hasDarkHero = DARK_HERO_PAGES.some(
-    (p) => pathname === p || pathname === p + "/"
-  );
-
-  /* If no dark hero, header is always "scrolled" (solid white bg, dark text) */
-  const isDark = isScrolled || !hasDarkHero;
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -48,10 +37,8 @@ export default function Header() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isDark
-            ? "bg-white/95 backdrop-blur-md shadow-sm"
-            : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white ${
+          isScrolled ? "shadow-sm" : ""
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -66,7 +53,7 @@ export default function Header() {
               height="28"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={isDark ? "#1E293B" : "#fff"}
+              stroke="#1E293B"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -77,9 +64,7 @@ export default function Header() {
               <path d="M3 15h6" />
             </svg>
             <span
-              className={`text-lg font-semibold tracking-tight transition-colors duration-300 ${
-                isDark ? "text-slate-900" : "text-white"
-              }`}
+              className="text-lg font-semibold tracking-tight text-slate-900"
               style={{ fontFamily: "var(--font-heading)" }}
             >
               Євростандарти Офісу
@@ -95,13 +80,9 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className={`cursor-pointer px-3 py-2 text-sm font-medium rounded-lg transition-colors duration-200 ${
-                    isDark
-                      ? isActive
-                        ? "text-[#2563EB] bg-blue-50"
-                        : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
-                      : isActive
-                        ? "text-white bg-white/15"
-                        : "text-white/80 hover:text-white hover:bg-white/10"
+                    isActive
+                      ? "text-[#2563EB] bg-blue-50"
+                      : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"
                   }`}
                 >
                   {link.label}
@@ -120,9 +101,7 @@ export default function Header() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-            className={`cursor-pointer lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200 ${
-              isDark ? "hover:bg-slate-100" : "hover:bg-white/10"
-            }`}
+            className="cursor-pointer lg:hidden flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200 hover:bg-slate-100"
             aria-label={isMobileMenuOpen ? "Закрити меню" : "Відкрити меню"}
           >
             <svg
@@ -130,7 +109,7 @@ export default function Header() {
               height="22"
               viewBox="0 0 24 24"
               fill="none"
-              stroke={isDark ? "#1E293B" : "#fff"}
+              stroke="#1E293B"
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
